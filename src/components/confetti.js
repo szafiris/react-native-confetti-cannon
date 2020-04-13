@@ -1,9 +1,10 @@
 // @flow strict
 
-import * as React from 'react';
-import { StyleSheet, Animated } from 'react-native';
+import * as React from "react";
 
-import {randomValue} from '../utils';
+import { Animated, StyleSheet } from "react-native";
+
+import { randomValue } from "../utils";
 
 type Props = {|
   left: Animated.Interpolation,
@@ -13,33 +14,41 @@ type Props = {|
   opacity: Animated.Interpolation,
 |};
 
-
-
 class Confetti extends React.PureComponent<Props> {
   props: Props;
   width: number = randomValue(8, 16);
   height: number = randomValue(6, 12);
-  isRounded: boolean = Math.round(randomValue(0, 1)) === 1;
+  isRounded: boolean = true;
   backgroundColor: string = this.props.color;
 
   render() {
     const { left, bottom, transform, opacity } = this.props;
     const { width, height, isRounded, backgroundColor } = this;
-    const style = { left, bottom, width, height, backgroundColor, transform, opacity};
+    const style = {
+      left,
+      bottom,
+      width,
+      height,
+      backgroundColor,
+      transform,
+      opacity,
+    };
 
     return (
-      <Animated.View style={[styles.confetti, isRounded && styles.rounded, style]} />
+      <Animated.View
+        style={[styles.confetti, isRounded && styles.rounded, style]}
+      />
     );
   }
 }
 
 const styles = StyleSheet.create({
   confetti: {
-    position: 'absolute'
+    position: "absolute",
   },
   rounded: {
-    borderRadius: 100
-  }
+    borderRadius: 100,
+  },
 });
 
 export default Confetti;
